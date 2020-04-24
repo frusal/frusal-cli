@@ -1,0 +1,22 @@
+{
+  "name": "frusal",
+  "version": "0.0.11",
+  "description": "CLI script to install and configure frusal.com workspace access library with static type checking against live schema.",
+  "author": "info@frusal.com",
+  "license": "ISC",
+  "bin": {
+    "frusal": "./index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/frusal/frusal-cli.git"
+  },
+  "bugs": {
+    "url": "https://github.com/frusal/frusal-cli/issues"
+  },
+  "homepage": "https://github.com/frusal/frusal-cli#readme",
+  "keywords": [
+    "frusal",
+    "cli"
+  ]
+}
