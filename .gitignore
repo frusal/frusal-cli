@@ -28,4 +28,8 @@
 .DS_Store
 Thumbs.db
 
+# Frusal login details
+.npm-frusal
+frusal.json
+
 # misc
