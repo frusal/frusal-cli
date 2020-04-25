@@ -4,6 +4,7 @@
   "description": "CLI script to install and configure frusal.com workspace access library with static type checking against live schema.",
   "private": true,
   "scripts": {
+    "start": "webpack --watch",
     "build": "webpack --mode=production"
   },
   "dependencies": {
