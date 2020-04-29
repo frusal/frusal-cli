@@ -105,7 +105,7 @@ export namespace CliWizard {
         }
 
         // Add frusal script to project.json
-        {
+        if (!outputTypeScript) {
             const latestNodePackage = JSON.parse(fs.readFileSync(PACKAGE_JSON).toString());
             latestNodePackage.scripts = { ...latestNodePackage.scripts, [SCRIPT_NAME]: SCRIPT_COMMAND };
             latestNodePackage.type = sourceUseRequireJs ? 'requirejs' : 'module';
