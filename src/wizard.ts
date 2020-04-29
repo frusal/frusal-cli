@@ -45,7 +45,7 @@ export namespace CliWizard {
 
         // Explain what is happening
         CliUtils.println();
-        CliUtils.println(`Initialising ${nodePackage.name} npm project for frusal library which allows to connect to frusal.com workspace.`);
+        CliUtils.println(`Configuring ${nodePackage.name} npm project with frusal library to enable frusal.com workspace connections.`);
 
         // Get library package name
         CliUtils.println();
@@ -92,7 +92,7 @@ export namespace CliWizard {
         // Check if frusal is installed as a runtime dependency
         CliUtils.println();
         if (!nodePackage.dependencies || !nodePackage.dependencies[FRUSAL_DEPENDENCY]) {
-            CliUtils.println('Installing "frusal" npm dependency...');
+            CliUtils.println('Installing npm dependencies...');
             [`npm install ${libraryPackageName} --save`, `npm install ${CLI_NPM_PACKAGE_NAME} --save-dev`].forEach(cmd => {
                 try {
                     childProcess.execSync(cmd);
@@ -123,8 +123,8 @@ export namespace CliWizard {
         // Done.
         CliUtils.println();
         CliUtils.println(` * Frusal.com access library is successfully initialised for project ${nodePackage.name}.`);
-        CliUtils.println(` * Next, please login and start updating your source code stabs and schema declarations.`);
-        CliUtils.println( ' * You can use `npm run frusal login`, `npm run frusal update` or `npm run frusal watch` commands.');
+        CliUtils.println(` * Next, please login and start updating your source code stubs and schema declarations.`);
+        CliUtils.println( ' * You can use `npx frusal login`, `npx frusal update` or `npx frusal watch` commands.');
         CliUtils.println();
 
         await CliUtils.ask('Please read the note above', {defaultAnswer: 'ok' });
