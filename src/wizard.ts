@@ -69,17 +69,20 @@ export namespace CliWizard {
         const outputTypeScript = await CliUtils.ask('Source code', {defaultAnswer: fs.existsSync(TSCONFIG_JSON) ? '2' : '1'}) === '2';
 
         // Get use modules
-        CliUtils.println();
-        CliUtils.println('Please choose generated source code module loader type:');
-        CliUtils.println('  [1] ECMAScript 6 Modules (using import statements) *recommended*');
-        CliUtils.println('  [2] RequireJS (using require() function)');
-        const sourceUseRequireJs = await CliUtils.ask('Module loader', {defaultAnswer: '1'}) === '2';
-        if (sourceUseRequireJs) {
+        let sourceUseRequireJs = false;
+        if (!outputTypeScript) {
             CliUtils.println();
-            CliUtils.println('Warning:');
-            CliUtils.println('   There is a known problem getting vscode and the tools it\'s using to perform declaration merging when using RequireJS module system.');
-            CliUtils.println('   More on TS declaration merging: https://www.typescriptlang.org/docs/handbook/declaration-merging.html');
-            await CliUtils.ask('Please read the note above', {defaultAnswer: 'ok' });
+            CliUtils.println('Please choose generated source code module loader type:');
+            CliUtils.println('  [1] ECMAScript 6 Modules (using import statements) *recommended*');
+            CliUtils.println('  [2] RequireJS (using require() function)');
+            sourceUseRequireJs = await CliUtils.ask('Module loader', {defaultAnswer: '1'}) === '2';
+            if (sourceUseRequireJs) {
+                CliUtils.println();
+                CliUtils.println('Warning:');
+                CliUtils.println('   There is a known problem getting vscode and the tools it\'s using to perform declaration merging when using RequireJS module system.');
+                CliUtils.println('   More on TS declaration merging: https://www.typescriptlang.org/docs/handbook/declaration-merging.html');
+                await CliUtils.ask('Please read the note above', {defaultAnswer: 'ok' });
+            }
         }
 
         // Get source code location
