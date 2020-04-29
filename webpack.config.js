@@ -35,6 +35,10 @@ function config() {
         output: {
             filename: "index.js"
         },
+        node: {
+            __dirname: false,
+            __filename: false
+        },
         target: "node"
     }
 }

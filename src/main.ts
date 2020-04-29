@@ -4,6 +4,7 @@ Copyright Fruit Salad Tech Pty Ltd. All Rights Reserved.
 import { NodeStorage, PortableUtils } from '@frusal/library-for-node';
 import { CliConfig } from 'config';
 import { CliConnection } from 'connection';
+import * as fs from 'fs';
 import * as path from 'path';
 import { CliSchema } from 'schema';
 import { CliWizard } from 'wizard';
@@ -17,7 +18,7 @@ function help(status: number, message?: string) {
     }
     const exe = path.basename(process.argv[1]);
     if (status !== 0) {
-        print(`usage: ${exe} [status | st | login | li | logout | lo | update | up | watch | w | help | h]`);
+        print(`usage: ${exe} [status | st | login | li | logout | lo | update | up | watch | w | version | v | help | h]`);
     } else {
         print();
         print(FRUSAL_DESCRIPTION);
@@ -32,6 +33,7 @@ function help(status: number, message?: string) {
         print(`    logout, lo  - logout`);
         print(`    update, up  - updates schema related declarations and source code`);
         print(`    watch, w    - watches for the schema changes online and execute updates (process runs until ^C)`);
+        print(`    version, v  - prints version numbers`);
         print(`    help, h     - prints this help`);
         print();
         print(`Examples:`);
@@ -55,8 +57,11 @@ async function main(...args: string[]) {
             } else {
                 help(1);
             }
-        } else if (cmd === null || cmd === 'help' || cmd === 'h' || cmd === '--help' || cmd === '-h' || cmd === '-?' || cmd === '/?') {
+        } else if (cmd === 'help' || cmd === 'h' || cmd === '--help' || cmd === '-h' || cmd === '-?' || cmd === '/?') {
             help(0);
+        } else if (cmd === 'version' || cmd === 'v' || cmd === '--version' || cmd === '-v') {
+            const packageJson = JSON.parse(fs.readFileSync(path.resolve(__dirname, 'package.json')).toString());
+            console.log(packageJson.version);
         } else {
             const connection = new CliConnection();
             await connection.open();
