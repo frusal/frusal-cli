@@ -29,11 +29,17 @@ function config() {
         plugins: [
             new CleanWebpackPlugin(),
             new webpack.BannerPlugin({ banner: '#!/usr/bin/env node', raw: true, entryOnly: true }),
-            new CopyPlugin([{ from: "static" }, { from: "README.md" }]),
+            new CopyPlugin([
+                { from: "static" },
+                { from: "README.md" },
+                { from: "node_modules/@frusal/library-for-node/index.d.ts" },
+                { from: "node_modules/@frusal/library-for-node/wrapper.mjs" },
+            ]),
             new MyPlugin(),
         ],
         output: {
-            filename: "index.js"
+            filename: "index.js",
+            libraryTarget: 'umd',
         },
         node: {
             __dirname: false,

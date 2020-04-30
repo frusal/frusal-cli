@@ -7,6 +7,10 @@
   "bin": {
     "frusal": "./index.js"
   },
+  "exports": {
+    "require": "./index.js",
+    "import": "./wrapper.mjs"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/frusal/frusal-cli.git"

@@ -9,6 +9,9 @@ import * as path from 'path';
 import { CliSchema } from 'schema';
 import { CliWizard } from 'wizard';
 
+// Export entire library to enable CLI package to be used as a library for other scripts. Specifically for create-database.mjs type of scripts.
+export * from '@frusal/library-for-node';
+
 const FRUSAL_DESCRIPTION = 'CLI script to install and configure frusal.com workspace access library with static type checking against live schema.';
 
 function help(status: number, message?: string) {
@@ -102,4 +105,12 @@ async function main(...args: string[]) {
     }
 }
 
-main(...process.argv);
+// eslint-disable-next-line @typescript-eslint/camelcase
+declare const __non_webpack_require__: RequireResolve & { main: NodeModule };
+// eslint-disable-next-line @typescript-eslint/camelcase
+const mainFileName = __non_webpack_require__.main ? __non_webpack_require__.main.filename : null;
+
+// Running as a "main" or as a "module" (for when it is used as a library)
+if (mainFileName ===  __filename) {
+    main(...process.argv);
+}
