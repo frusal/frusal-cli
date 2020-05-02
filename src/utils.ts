@@ -70,4 +70,14 @@ export namespace CliUtils {
         fs.writeFileSync(filename, JSON.stringify(data, null, 2) + '\n'); // indentation of 2 matches that of package.json for frusal-cli.
     }
 
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    // eslint-disable-next-line @typescript-eslint/camelcase
+    declare const __non_webpack_require__: RequireResolve & { main: NodeModule };
+    export function isRunningMain() {
+        // eslint-disable-next-line @typescript-eslint/camelcase
+        const mainFileName = __non_webpack_require__.main ? __non_webpack_require__.main.filename : null;
+        return mainFileName ===  __filename;
+    }
+
 }

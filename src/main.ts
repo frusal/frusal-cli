@@ -1,12 +1,10 @@
-/*!
-Copyright Fruit Salad Tech Pty Ltd. All Rights Reserved.
-*/
 import { NodeStorage, PortableUtils } from '@frusal/library-for-node';
 import { CliConfig } from 'config';
 import { CliConnection } from 'connection';
 import * as fs from 'fs';
 import * as path from 'path';
 import { CliSchema } from 'schema';
+import { CliUtils } from 'utils';
 import { CliWizard } from 'wizard';
 
 // Export entire library to enable CLI package to be used as a library for other scripts. Specifically for create-database.mjs type of scripts.
@@ -105,12 +103,7 @@ async function main(...args: string[]) {
     }
 }
 
-// eslint-disable-next-line @typescript-eslint/camelcase
-declare const __non_webpack_require__: RequireResolve & { main: NodeModule };
-// eslint-disable-next-line @typescript-eslint/camelcase
-const mainFileName = __non_webpack_require__.main ? __non_webpack_require__.main.filename : null;
-
 // Running as a "main" or as a "module" (for when it is used as a library)
-if (mainFileName ===  __filename) {
+if (CliUtils.isRunningMain()) {
     main(...process.argv);
 }

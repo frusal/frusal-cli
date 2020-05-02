@@ -128,16 +128,14 @@ function generateDeclarations(module: Module) {
     const res: string[] = [];
     res.push('/* GENERATED FILE - DO NOT EDIT */');
     res.push('');
-    // res.push('export { };');
-    // res.push('');
-    res.push(`import { types } from '${CliConfig.libraryPackageName}';`); // always typescript way...
+    res.push(`import { Entity, Property, PrimitiveValue, ReferenceValue, InversedSet } from '${CliConfig.libraryPackageName}';`); // declarations are in typescript (no require)...
     res.push('');
     res.push(`declare module './${NameUtils.toKebabCase(module.name)}' {`);
     module.classes.forEach(clazz => {
         res.push(``);
         descriptionToComment(res, '    ', clazz);
         // TODO, here we should properly initialise inheritance clause, and then only include fields which belongs to this class (exclude ancestors).
-        res.push(`    interface ${NameUtils.toPascalCase(clazz.name)} extends types.Entity {`);
+        res.push(`    interface ${NameUtils.toPascalCase(clazz.name)} extends Entity {`);
         clazz.fieldsIncludeAncestors.forEach(prop => {
             if (prop instanceof Property) {
                 descriptionToComment(res, '        ', prop);
@@ -150,7 +148,7 @@ function generateDeclarations(module: Module) {
         res.push(`        const id: string;`);
         clazz.fieldsIncludeAncestors.forEach(prop => {
             if (prop instanceof Property) {
-                res.push(`        const ${NameUtils.toCamelCase(prop.name)}_prop: types.TProperty;`);
+                res.push(`        const ${NameUtils.toCamelCase(prop.name)}_prop: Property;`);
             }
         });
         res.push(`    }`);
