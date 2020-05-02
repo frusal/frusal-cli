@@ -132,19 +132,32 @@ function generateDeclarations(module: Module) {
     res.push('');
     res.push(`declare module './${NameUtils.toKebabCase(module.name)}' {`);
     module.classes.forEach(clazz => {
+        const className = NameUtils.toPascalCase(clazz.name);
+        const extendsClassName = clazz.ancestor ? NameUtils.toPascalCase(clazz.ancestor.name) : 'Entity';
         res.push(``);
         descriptionToComment(res, '    ', clazz);
         // TODO, here we should properly initialise inheritance clause, and then only include fields which belongs to this class (exclude ancestors).
-        res.push(`    interface ${NameUtils.toPascalCase(clazz.name)} extends Entity {`);
+        res.push(`    interface ${className} extends ${extendsClassName} {`);
         clazz.fieldsIncludeAncestors.forEach(prop => {
             if (prop instanceof Property) {
                 descriptionToComment(res, '        ', prop);
-                prop.type.tsDeclaration(prop).forEach(line => res.push('        ' + line));
+                res.push('        ' + prop.type.tsDeclaration(prop));
             }
         });
         res.push(`    }`);
-        res.push(`    namespace ${NameUtils.toPascalCase(clazz.name)} {`);
-        res.push(`        /** ClassSpec ID for '${clazz.name}' (${clazz.id}). */`);
+        res.push(`    // ${className} instance metadata`);
+        res.push(`    interface ${className} extends ${extendsClassName} {`);
+        clazz.fieldsIncludeAncestors.forEach(prop => {
+            if (prop instanceof Property) {
+                if (prop.type.tsMetaDeclaration) {
+                    res.push('        ' + prop.type.tsMetaDeclaration(prop));
+                }
+            }
+        });
+        res.push(`    }`);
+        res.push(`    // ${className} class metadata`);
+        res.push(`    namespace ${className} {`);
+        res.push(`        /** ${clazz.name} class spec ID (${clazz.id}). */`);
         res.push(`        const id: string;`);
         clazz.fieldsIncludeAncestors.forEach(prop => {
             if (prop instanceof Property) {
@@ -160,10 +173,10 @@ function generateDeclarations(module: Module) {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Augment Concrete classes
 
-function generateStubs(module: Module, stubsOldContent: string) {
+function generateStubs(module: Module, stubsOldContent: string): string {
     function classDef(clazz: ClassSpec) {
-        const extendsClause = clazz.ancestor ? ` extends ${NameUtils.toPascalCase(clazz.ancestor.name)}` : '';
-        return `class ${NameUtils.toPascalCase(clazz.name)}${extendsClause}`;
+        const extendsClassName = clazz.ancestor ? NameUtils.toPascalCase(clazz.ancestor.name) : 'Entity';
+        return `class ${NameUtils.toPascalCase(clazz.name)} extends ${extendsClassName}`;
     }
     function classStub(clazz: ClassSpec): string[] {
         const res: string[] = [];
@@ -182,7 +195,7 @@ function generateStubs(module: Module, stubsOldContent: string) {
         let res = stubsOldContent;
         module.classes.forEach(clazz => {
             let found = false;
-            const regExp = new RegExp(`class\\s+${NameUtils.toPascalCase(clazz.name)}\\W*?{`, 'g');
+            const regExp = new RegExp(`class\\s+${NameUtils.toPascalCase(clazz.name)}\\s+(extends\\s+\\w+\\s+)?{`, 'g');
             res = res.replace(regExp, () => { found = true; return classDef(clazz) + ' {'; });
             if (!found) {
                 // And a new stub to the bottom
@@ -201,9 +214,9 @@ function generateStubs(module: Module, stubsOldContent: string) {
         res.push('/* GENERATED STUB, remove this comment and take over development of this code. */');
         res.push('');
         if (CliConfig.sourceUseRequireJs) {
-            res.push(`const { session } = require('${CliConfig.libraryPackageName}');`);
+            res.push(`const { session, Entity } = require('${CliConfig.libraryPackageName}');`);
         } else {
-            res.push(`import { session } from '${CliConfig.libraryPackageName}';`);
+            res.push(`import { session, Entity } from '${CliConfig.libraryPackageName}';`);
         }
         module.classes.forEach(clazz => res.push(...classStub(clazz)));
         return res.join('\n') + '\n';
