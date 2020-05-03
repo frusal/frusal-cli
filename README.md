@@ -62,8 +62,10 @@ The up-to-date parameter list and functions could be found in the source code [h
 
 You can access frusal.com workspace by using the library directly. This CLI and declarations it generates is just a convenience which helps to produce better quality code, quicker.
 
+This npm package can be used as a node library itself. It is convenient for use in scripts, like database or schema population scripts. See this usage [example](https://github.com/frusal/frusal-example-schema-by-javascript#readme).
+
 [Visual Studio Code]: https://code.visualstudio.com/
 [Node.js]: https://nodejs.org/
-[Angular Tutorial]: https://github.com/frusal/frusal-tutorial-angular
-[React Tutorial]: https://github.com/frusal/frusal-tutorial-react
-[Node.js Tutorial]: https://github.com/frusal/frusal-tutorial-node
+[Angular Tutorial]: https://github.com/frusal/frusal-tutorial-angular#readme
+[React Tutorial]: https://github.com/frusal/frusal-tutorial-react#readme
+[Node.js Tutorial]: https://github.com/frusal/frusal-tutorial-node#readme
