@@ -4,7 +4,7 @@ Provides statically typed access to the data and schema at frusal.com workspace.
 
 🚧 *The project is in development and is not available for general public yet.*
 
-*Facilitates usage of [browser][br], [node][no] or [flexible][fl] frusal libraries. Follow one of those links to see some code examples, or see the tutorials listed below.*
+Facilitates usage of [browser][br], [node][no] or [flexible][fl] frusal libraries. Follow one of those links to see some code examples, or see the tutorials listed below.
 
 ## Overview
 
