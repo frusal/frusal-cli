@@ -1,8 +1,10 @@
 # CLI script to manage frusal.com workspace access library
 
+Provides statically typed access to the data and schema at frusal.com workspace.
+
 🚧 *The project is in development and is not available for general public yet.*
 
-Provides statically typed access to the data and schema at frusal.com workspace.
+*Facilitates usage of [browser][br], [node][no] or [flexible][fl] frusal libraries. Follow one of those links to see some code examples, or see the tutorials listed below.*
 
 ## Overview
 
@@ -69,3 +71,7 @@ This npm package can be used as a node library itself. It is convenient for use 
 [Angular Tutorial]: https://github.com/frusal/frusal-tutorial-angular#readme
 [React Tutorial]: https://github.com/frusal/frusal-tutorial-react#readme
 [Node.js Tutorial]: https://github.com/frusal/frusal-tutorial-node#readme
+
+[br]: https://www.npmjs.com/package/@frusal/library-for-browser
+[no]: https://www.npmjs.com/package/@frusal/library-for-node
+[fl]: https://www.npmjs.com/package/@frusal/library
