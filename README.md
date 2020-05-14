@@ -15,7 +15,7 @@ Frusal CLI script has two basic functions:
 
 This would enable your application to access frusal.com workspace data and schema (class structure). Both can be changed through the API with type validation.
 
-An IDE like [Visual Studio Code] would use our live declarations to performs source code static analysis, type validation and auto completion (IntelliSense).
+An IDE like [Visual Studio Code] would use our live declarations to perform source code static analysis, type validation and auto completion (IntelliSense).
 
 The CLI could be ran in _watch_ mode, which would update the declarations live.
 
@@ -38,9 +38,9 @@ On the first run, frusal CLI takes you though interactive configuration wizard w
 
 ## Configuration
 
-Once logged on, your access token is stored in a `.npm-frusal` file typically located in your home directory. Though, the file location is first searched up the directory ancestry which allows to override the default location. For instance, it can be added to your source control system.
+Once logged on, your access token is stored in a `.npm-frusal` file typically located in your home directory. Though, the file is first searched up the directory ancestry which allows to override the default location. For instance, it can be added to your source control system.
 
-The other set of parameters required to generate stubs and declarations is stored in `frusal.json`. This file is in your project root, next to package.json. It is initially created on the first run of this CLI, and maintained by directly editing it. The up-to-date set of options could be found in the source code [here](./src/config.ts).
+Other parameters required to generate stubs and declarations are stored in `frusal.json`. This file is in your project root, next to the package.json. It is initially created on the first run of this CLI, and maintained by directly editing it. The up-to-date set of options could be found in the source code [here](./src/config.ts).
 
 ## Usage
 
