@@ -128,7 +128,7 @@ function generateDeclarations(module: Module) {
     const res: string[] = [];
     res.push('/* GENERATED FILE - DO NOT EDIT */');
     res.push('');
-    res.push(`import { Entity, ClassSpec, Property, PrimitiveValue, ReferenceValue, InversedSet } from '${CliConfig.libraryPackageName}';`); // declarations are in typescript (no require)...
+    res.push(`import { Stage, Entity, ClassSpec, Property, PrimitiveValue, ReferenceValue, InversedSet } from '${CliConfig.libraryPackageName}';`); // declarations are in typescript (no require)...
     res.push('');
     res.push(`declare module './${NameUtils.toKebabCase(module.name)}' {`);
     module.classes.forEach(clazz => {
@@ -159,7 +159,7 @@ function generateDeclarations(module: Module) {
         res.push(`    namespace ${className} {`);
         res.push(`        /** ${clazz.name} class spec ID (${clazz.id}). */`);
         res.push(`        const id: string;`);
-        res.push(`        const classSpec: ClassSpec;`);
+        res.push(`        function classSpec(stage: Stage): ClassSpec;`);
         clazz.fieldsIncludeAncestors.forEach(prop => {
             if (prop instanceof Property) {
                 res.push(`        const ${NameUtils.toCamelCase(prop.name)}_prop: Property;`);
