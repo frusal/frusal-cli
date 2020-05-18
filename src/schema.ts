@@ -158,7 +158,7 @@ function generateDeclarations(module: Module) {
         res.push(`    // ${className} class metadata`);
         res.push(`    namespace ${className} {`);
         res.push(`        /** ${clazz.name} class spec ID (${clazz.id}). */`);
-        res.push(`        const id: string;`);
+        res.push(`        const classSpecId: string;`);
         res.push(`        function classSpec(stage: Stage): ClassSpec;`);
         clazz.fieldsIncludeAncestors.forEach(prop => {
             if (prop instanceof Property) {
