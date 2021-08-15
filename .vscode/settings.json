@@ -1,4 +1,11 @@
 {
+    "window.title": "🌀${rootName}${separator}${activeEditorShort}",
+    "editor.codeActionsOnSave": {
+        "source.organizeImports": true
+    },
+    "files.insertFinalNewline": true,
+    "files.trimFinalNewlines": true,
+    "files.trimTrailingWhitespace": true,
     "cSpell.language": "en-GB",
     "cSpell.words": [
         "Aspectable",
@@ -41,12 +48,5 @@
         "visitables",
         "wamp",
         "wildcard"
-    ],
-    "editor.codeActionsOnSave": {
-        "source.organizeImports": true
-    },
-    "files.insertFinalNewline": true,
-    "files.trimFinalNewlines": true,
-    "files.trimTrailingWhitespace": true,
-    "window.title": "🌀${rootName}${separator}${activeEditorShort}"
+    ]
 }
