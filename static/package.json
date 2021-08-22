@@ -1,6 +1,6 @@
 {
   "name": "frusal",
-  "version": "0.0.28",
+  "version": "0.0.34",
   "description": "CLI script to install and configure frusal.com workspace access library with static type checking against live schema.",
   "author": "info@frusal.com",
   "license": "ISC",
