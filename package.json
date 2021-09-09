@@ -7,6 +7,10 @@
     "start": "webpack --watch",
     "build": "webpack --mode=production"
   },
+  "dependenciesComments": {
+    "(dev) @frusal/library-for-node": "file:../../frusal/javascript/library/dist/library-for-node",
+    "(prod) @frusal/library-for-node": "x.x.x"
+  },
   "dependencies": {
     "@frusal/library-for-node": "x.x.x",
     "rxjs": "6.x.x"

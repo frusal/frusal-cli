@@ -16,7 +16,7 @@ export class CliConfig {
     private constructor() {}
 
     @PrefItem()
-    static developmentServer = '';
+    static developmentServer = ''; // e.g., http://localhost:8080
 
     @PrefItem()
     static defaultUsername = '';
